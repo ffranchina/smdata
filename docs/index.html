@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Francesco Franchina" />
+
+<meta name="date" content="2019-04-02" />
+
+<title>Italians’ vehicles</title>
+
+<script src="vehicles_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="vehicles_files/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="vehicles_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="vehicles_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="vehicles_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="vehicles_files/navigation-1.1/tabsets.js"></script>
+<link href="vehicles_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="vehicles_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="vehicles_files/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="vehicles_files/plotly-binding-4.8.0/plotly.js"></script>
+<script src="vehicles_files/typedarray-0.1/typedarray.min.js"></script>
+<link href="vehicles_files/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="vehicles_files/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="vehicles_files/plotly-htmlwidgets-css-1.39.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="vehicles_files/plotly-main-1.39.2/plotly-latest.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Italians’ vehicles</h1>
+<h4 class="author"><em>Francesco Franchina</em></h4>
+<h4 class="date"><em>04/02/2019</em></h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#overview-of-the-dataset">Overview of the dataset</a></li>
+<li><a href="#the-aim-of-the-project">The aim of the project</a></li>
+<li><a href="#exploratory-analysis">Exploratory analysis</a><ul>
+<li><a href="#dataset-structure">Dataset structure</a></li>
+<li><a href="#registered-vehicles-over-time">Registered vehicles over time</a></li>
+<li><a href="#average-age">Average age</a></li>
+<li><a href="#number-of-vehicles">Number of vehicles</a></li>
+<li><a href="#type-of-fuel">Type of fuel</a></li>
+<li><a href="#emissions-per-region">Emissions per region</a></li>
+<li><a href="#registered-cars-by-euro-class-and-fuel-over-time">Registered cars by euro class and fuel over time</a></li>
+<li><a href="#interactive-plot">Interactive plot</a></li>
+</ul></li>
+<li><a href="#trivia">Trivia</a><ul>
+<li><a href="#whats-wrong-with-valle-daosta-and-trentino">What’s wrong with Valle d’Aosta and Trentino?</a></li>
+<li><a href="#the-oldest-vehicle">The oldest vehicle</a></li>
+</ul></li>
+<li><a href="#the-challenge-of-managing-52m-rows">The challenge of managing 52M rows</a></li>
+<li><a href="#conclusions">Conclusions</a></li>
+</ul>
+</div>
+
+<div id="overview-of-the-dataset" class="section level2">
+<h2>Overview of the dataset</h2>
+<p>The <a href="http://dati.mit.gov.it/catalog/dataset/60a57c60-758c-4bd9-8d87-c286b797c289">dataset</a> comes from the the official Italian Ministero delle Infrastrutture e dei Trasporti, the ministry that keeps track of every vehicle in the Country. The data are published under the <a href="https://creativecommons.org/licenses/by/4.0/"><em>Creative Commons Attribution Licence</em></a> and its last update (at the moment of writing) was on the <strong>31/10/2017</strong>.</p>
+<p>The dataset shows many interesting information coming from all the <strong>52.165.189</strong> vehicles owned by Italians and that are authorized to be driven.</p>
+<p>The dataset is provided as <em>.csv</em> formatted files divided by regions (hence, 20 chunks).</p>
+<p>The <a href="http://dati.mit.gov.it/catalog/dataset/60a57c60-758c-4bd9-8d87-c286b797c289/resource/5d21aa87-a57d-42ee-b504-7da3218152be/download/metadata-parco-circolante-vetture.pdf">official and extensive documentation</a> about the fields of the dataset is available on the same portal.</p>
+<p>The data (7.7GB compressed) have been imported into a SQLite database that will give us the chance to consume them in a very flexible way.</p>
+</div>
+<div id="the-aim-of-the-project" class="section level2">
+<h2>The aim of the project</h2>
+<p>The goal of this project is to explore the current status of the Italian vehicles and draw (possibly) interesting insights from the data. The secondary goal of the project is to study how much our vehicles are eco-friendly.</p>
+</div>
+<div id="exploratory-analysis" class="section level2">
+<h2>Exploratory analysis</h2>
+<p>To draw inspiration and insight from the data, let’s begin from explore them.</p>
+<pre class="r"><code>db &lt;- dbConnect(SQLite(), dbname=&quot;italian_vehicles.sqlite&quot;)
+population &lt;- read.csv(&#39;regioni.csv&#39;)
+composition &lt;- read.csv(&#39;regioni_comp.csv&#39;)</code></pre>
+<p>We already know that we are dealing with more than 52 millions of vehicles and it can be interesting to compare this number to the number of people that actually live in Italy.</p>
+<p>We will extract the data about the Italian population from the <a href="http://www.demo.istat.it/pop2018/">Istat platform</a>. This data are the estimated sizes of the populations divided by region. It worth to mention that this estimation also include those people that cannot drive yet or cannot anymore.</p>
+<p>We will use the data updated to 01/01/2018, the closest possible to last update to the vehicles dataset.</p>
+<pre class="r"><code>n_vehicles &lt;- dbGetQuery(db, &#39;SELECT count(*) AS n_vehicles FROM vehicles&#39;)[[1]]
+n_people &lt;- sum(population$Maschi...Femmine)[[1]]
+
+vehicles2people_ratio &lt;- n_vehicles / n_people
+cat(&quot;The ratio between vehicles and people in Italy:&quot;, vehicles2people_ratio)</code></pre>
+<pre><code>## The ratio between vehicles and people in Italy: 0.862463</code></pre>
+<p>It’s a pretty high number if we take into account the clarifications made above.</p>
+<div id="dataset-structure" class="section level3">
+<h3>Dataset structure</h3>
+<p>The dataset contains a vast amount of interesting informations like: municipality, province and region of residence of the owner, the type of vehicle and which is its main pourpose, the amount of emissions, the type of fuel, the date of the registration and some few others more.</p>
+<p>The mentioned one are almost all specified for each vehicles, the other are less relevant since they have a lot of missing data.</p>
+<p>This dataset contains the information about how each vehicle is been used, let’s visualize them</p>
+<pre class="r"><code>res &lt;- dbGetQuery(db, &#39;SELECT count(*) AS n, destinazione FROM vehicles GROUP BY destinazione ORDER BY n DESC&#39;)
+
+n_cat &lt;- 3
+df = rbind( res[1:n_cat,], c(sum(res[-(1:n_cat), 1]), &#39;OTHERS&#39;) )
+df$n = as.integer(df$n)
+
+ggplot(df, aes(x=&quot;&quot;, y=n, fill=destinazione)) +
+  geom_col() +
+  scale_fill_brewer(palette=&quot;PuBuGn&quot;) +
+  geom_text(aes(x=rep(1.2, n_cat+1), label = scales::percent(n / n_vehicles)), position = position_stack(vjust = 0.5)) +
+  coord_polar(&quot;y&quot;) + 
+  theme_void()</code></pre>
+<p><img src="vehicles_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>The vast majority of the dataset is made up by private cars, actually. These, along with the motocycles, constitute around the 88% of the vehicles that are active on our territory.</p>
+<p>We can already state that, if we want to reduce the CO2 emissions, the private sector is the right place to look into. The secon place is occupied by the TIRs for moving goods and food but they represent just a tiny fraction of the whole. The rest is given by agricoltural means and special reserved vehicles (Police, Firefighters, Ambulances, …).</p>
+</div>
+<div id="registered-vehicles-over-time" class="section level3">
+<h3>Registered vehicles over time</h3>
+<p>This dataset keeps track of every vehicle that, potentially, could be driven on the roads. So it includes also historical cars or vehicles non longer mainteined but not dismantled yet.</p>
+<p>Let’s see how the current vehicles have been registered over time.</p>
+<pre class="r"><code>res &lt;- dbGetQuery(db, &#39;SELECT strftime(&quot;%Y&quot;, data_immatricolazione) AS year, count(*) AS n FROM vehicles WHERE year &gt; &quot;1991&quot; GROUP BY year&#39;)
+res2 &lt;- dbGetQuery(db, &#39;SELECT &quot;&gt;1991&quot; AS year, count(*) AS n FROM vehicles WHERE strftime(&quot;%Y&quot;, data_immatricolazione) &lt;= &quot;1991&quot;&#39;)
+
+df = rbind(res, res2)
+
+ggplot(df, aes(year, n)) +
+  geom_bar(stat=&quot;identity&quot;, fill=&quot;#1c9099&quot;) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  xlab(&quot;&quot;) + ylab(&quot;n° of registered cars&quot;)</code></pre>
+<p><img src="vehicles_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>It is striking to notice that we still have many thousands of vehicles that have been registered <strong>more than 28 years ago</strong>!</p>
+<p>It ss also very easy to spot the <strong>financial crysis</strong> (around 2013): less money to register new cars.</p>
+</div>
+<div id="average-age" class="section level3">
+<h3>Average age</h3>
+<p>We have seen that, actually, we are sorrounded by pretty old vehicles. That is surprising so, let’s have a look at the average of age of the vehicles and let’s do it by dividing the results by region to see if some patterns emerge.</p>
+<pre class="r"><code>df &lt;- dbGetQuery(db, &#39;SELECT avg(strftime(&quot;%Y&quot;, &quot;2017-10-31&quot;) - strftime(&quot;%Y&quot;, data_immatricolazione)) AS eta_media, regione_residenza FROM vehicles GROUP BY regione_residenza&#39;)
+df = df[order(df$eta_media, decreasing=TRUE),]
+
+layout(matrix(c(1,1,2), nrow = 1, ncol = 3))
+
+par(mar=c(13,5,5,3))
+barplot(df$eta_media, col=rgb_blue, border=rgb_blue, names.arg=df$regione_residenza, las=2, ylab=&quot;Average age&quot;)
+abline(h=mean(df$eta_media), col=rgb_yellow, lwd=3)
+
+par(mar=c(2,1,2,1))
+plot_on_national_map(df)</code></pre>
+<p><img src="vehicles_files/figure-html/unnamed-chunk-7-1.png" width="1152" /></p>
+<p>So the average age of a vehicle in Italy is <strong>around 12-13 years</strong>. But, more interesting, the distribution of the averages per region is very different and follow the virtual borders given from the <strong>meridional issue</strong>: in the south we can see older vehicles (the average is more than 15 years for some regions), in the north we see newer vehicles (around 11 years). The factor behind this patter could be potentially a lot and we will not dig into it further in this presentation.</p>
+<p>The <strong>two outliers</strong> of this plot are clearly <em>Valle d’Aosta</em> and <em>Trentino-Alto Adige</em>. Their car have an average age around only 6 years, the half of the Italian average.</p>
+</div>
+<div id="number-of-vehicles" class="section level3">
+<h3>Number of vehicles</h3>
+<p>We know the number of vehicles in total and it’s very easy to know the same number split by regions but it wouldn’t be fair without normalizing them to the number of actual people that live in each region.</p>
+<pre class="r"><code>df &lt;- dbGetQuery(db, &#39;SELECT count(*) AS n, regione_residenza FROM vehicles GROUP BY regione_residenza&#39;)
+df = normalize(df, &quot;n&quot;)
+df = df[order(df$n, decreasing=TRUE),]
+
+layout(matrix(c(1,1,2), nrow = 1, ncol = 3))
+
+par(mar=c(13,5,5,3))
+barplot(df$n, col=rgb_blue, border=rgb_blue, names.arg=df$regione_residenza, las=2, ylab=&quot;Average vehicles per person&quot;)
+abline(h=mean(df$n), col=rgb_yellow, lwd=3)
+
+par(mar=c(2,1,2,1))
+plot_on_national_map(df)</code></pre>
+<p><img src="vehicles_files/figure-html/unnamed-chunk-8-1.png" width="1152" /></p>
+<p>We can see that the average is pretty balanced and doesn’t seem to follow a particular pattern. But there are still the same outlier of before showing another surpising result: in <em>Valle d’Aosta</em> they almost have <strong>2 vehicles per person</strong>. It’s very remarkable reminding that inside the estimated number of inhabitants there are also children! For sure there must be an explaination to this. Let’s go on for the moment.</p>
+</div>
+<div id="type-of-fuel" class="section level3">
+<h3>Type of fuel</h3>
+<p>Let’s turn our gaze to the positive side: let’s count the (normalized) number of vehicles that make use of more eco-friendly ways of moving. We will select all the vehicles that are electric, hybrids or make use of gases.</p>
+<pre class="r"><code>df &lt;- dbGetQuery(db, &#39;SELECT count(*) AS n, regione_residenza From vehicles where alimentazione IN (&quot;ELETTR&quot;, &quot;GPL&quot;, &quot;METANO&quot;, &quot;B/ETA&quot;, &quot;B/GPL&quot;, &quot;B/MET&quot;) OR alimentazione LIKE &quot;IBRIDO%&quot; GROUP BY regione_residenza&#39;)
+df = normalize(df, &quot;n&quot;)
+df = df[order(df$n, decreasing=TRUE),]
+
+layout(matrix(c(1,1,2), nrow = 1, ncol = 3))
+
+par(mar=c(13,5,5,3))
+barplot(df$n, col=rgb_blue, border=rgb_blue, names.arg=df$regione_residenza, las=2, ylab=&quot;Eco/Hybrid vehicles per person&quot;)
+abline(h=mean(df$n), col=rgb_yellow, lwd=3)
+
+par(mar=c(2,1,2,1))
+plot_on_national_map(df)</code></pre>
+<p><img src="vehicles_files/figure-html/unnamed-chunk-9-1.png" width="1152" /></p>
+<p>This time we have a huge difference across the Peninsula. Still it follows the pattern of the meridional issue but here, in the center of Italy, we can find the highest density of more eco-friendly vehicles.</p>
+</div>
+<div id="emissions-per-region" class="section level3">
+<h3>Emissions per region</h3>
+<p>Let’s now analyse the other side, the pollution. We will continue the research looking where the CO2 emissions are more concentrated. We will normalize also this data by the number of people the live in each region.</p>
+<pre class="r"><code>df &lt;- dbGetQuery(db, &#39;SELECT sum(emissioni_co2) AS emissioni, regione_residenza FROM vehicles GROUP BY regione_residenza&#39;)
+df = normalize(df, &quot;emissioni&quot;)
+df = df[order(df$emissioni, decreasing=TRUE),]
+
+layout(matrix(c(1,1,2), nrow = 1, ncol = 3))
+
+par(mar=c(13,5,5,3))
+barplot(df$emissioni, col=rgb_blue, border=rgb_blue, names.arg=df$regione_residenza, las=2, ylab=&quot;Emissions (g/km per person)&quot;)
+abline(h=mean(df$emissioni), col=rgb_yellow, lwd=3)
+
+par(mar=c(2,1,2,1))
+plot_on_national_map(df)</code></pre>
+<p><img src="vehicles_files/figure-html/unnamed-chunk-10-1.png" width="1152" /></p>
+<p>It seems that exist a very strong link with the number of vehicles and the amount of emissions per person disregarding the impact of eco-friendly means of transport. It could seem very obvious since, actually, the amount of green vehicles it’s very scarce.</p>
+</div>
+<div id="registered-cars-by-euro-class-and-fuel-over-time" class="section level3">
+<h3>Registered cars by euro class and fuel over time</h3>
+<div class="figure">
+<img src="snapshot.svg" alt="Snapshot of the registered cars" />
+<p class="caption">Snapshot of the registered cars</p>
+</div>
+<p>This data have on the <em>y</em> axis the same unit: it’s easy to see how we are still far from an ideal situation. The presence of higher euro class seems to impact just a few on the final balance. Maybe we should start considering reducing the number of vehicles.</p>
+</div>
+<div id="interactive-plot" class="section level3">
+<h3>Interactive plot</h3>
+<p>Since we hava a lot of data, is good to interact with them to explore them in a deeper way. In particular here will be possible to see, per each region, how the total percentage of number of vehicles is related to the total percentages of different variables. We assume that, ideally, the two percentages should be equal always to be in a balanced situation, of course, as we saw, we are not in that scenario.</p>
+<pre class="r"><code>pc_co2 &lt;- dbGetQuery(db, &#39;SELECT sum(emissioni_co2) / (SELECT sum(emissioni_co2) FROM vehicles) AS &quot;pc_emissions&quot;, regione_residenza FROM vehicles GROUP BY regione_residenza&#39;)
+pc_n &lt;- dbGetQuery(db, &#39;SELECT cast(count(*) AS float) / (SELECT count(*) FROM vehicles) AS &quot;pc_total&quot;, regione_residenza FROM vehicles GROUP BY regione_residenza&#39;)
+
+pc_euro4p &lt;- dbGetQuery(db, &#39;SELECT cast(count(*) AS float) / (SELECT count(*) FROM vehicles) AS &quot;pc_euro4p&quot;, regione_residenza FROM vehicles WHERE classe_euro IN (&quot;4&quot;, &quot;5&quot;, &quot;6&quot;) GROUP BY regione_residenza&#39;)
+
+pc_petrol &lt;- dbGetQuery(db, &#39;SELECT cast(count(*) AS float) / (SELECT count(*) FROM vehicles) AS &quot;pc_petrol&quot;, regione_residenza FROM vehicles WHERE alimentazione = &quot;BENZ&quot; GROUP BY regione_residenza&#39;)
+pc_disel &lt;- dbGetQuery(db, &#39;SELECT cast(count(*) AS float) / (SELECT count(*) FROM vehicles) AS &quot;pc_disel&quot;, regione_residenza FROM vehicles WHERE alimentazione = &quot;GASOL&quot; GROUP BY regione_residenza&#39;)
+pc_eco &lt;- dbGetQuery(db, &#39;SELECT cast(count(*) AS float) / (SELECT count(*) FROM vehicles) AS &quot;pc_ecohybrid&quot;, regione_residenza FROM vehicles WHERE alimentazione IN (&quot;ELETTR&quot;, &quot;GPL&quot;, &quot;METANO&quot;, &quot;B/ETA&quot;, &quot;B/GPL&quot;, &quot;B/MET&quot;) OR alimentazione LIKE &quot;IBRIDO%&quot; GROUP BY regione_residenza&#39;)
+
+
+regional_data &lt;- list(pc_co2, pc_n, pc_euro4p, pc_petrol, pc_disel, pc_eco) %&gt;% reduce(full_join, by = &quot;regione_residenza&quot;)
+
+p &lt;- plot_ly(regional_data, x=~pc_total, y=~pc_emissions, text=~paste(regione_residenza)) %&gt;%
+  layout(
+    yaxis = list(title=&quot;Selected variable&quot;),
+    updatemenus = list(
+      list(
+        y = 0.8,
+        buttons = list(
+
+          list(method = &quot;restyle&quot;,
+               args = list(&quot;y&quot;, list(regional_data$pc_emissions)),
+               label = &quot;% emissions&quot;),
+          list(method = &quot;restyle&quot;,
+               args = list(&quot;y&quot;, list(regional_data$pc_petrol)),
+               label = &quot;% Petrol&quot;),
+          list(method = &quot;restyle&quot;,
+               args = list(&quot;y&quot;, list(regional_data$pc_euro4p)),
+               label = &quot;% Euro 4+&quot;),
+          list(method = &quot;restyle&quot;,
+               args = list(&quot;y&quot;, list(regional_data$pc_disel)),
+               label = &quot;% Disel&quot;),
+          list(method = &quot;restyle&quot;,
+               args = list(&quot;y&quot;, list(regional_data$pc_ecohybrid)),
+               label = &quot;% Eco/Hybrid&quot;)))
+    )
+  )
+
+p</code></pre>
+<pre><code>## No trace type specified:
+##   Based on info supplied, a &#39;scatter&#39; trace seems appropriate.
+##   Read more about this trace type -&gt; https://plot.ly/r/reference/#scatter</code></pre>
+<pre><code>## No scatter mode specifed:
+##   Setting the mode to markers
+##   Read more about this attribute -&gt; https://plot.ly/r/reference/#scatter-mode</code></pre>
+<div id="htmlwidget-e5e715e6aa574fdfe249" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e5e715e6aa574fdfe249">{"x":{"visdat":{"41614cc1a8d":["function () ","plotlyVisDat"]},"cur_data":"41614cc1a8d","attrs":{"41614cc1a8d":{"x":{},"y":{},"text":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"Selected variable"},"updatemenus":[{"y":0.8,"buttons":[{"method":"restyle","args":["y",[[0.0216821689059521,0.00865982737802044,0.0271369654740253,0.0742727974539153,0.0777848294397407,0.0213962024370421,0.0994721512185589,0.0221604085546104,0.174000398894206,0.0257975722259648,0.00508618056999049,0.0803157795356962,0.0558099756546875,0.0260033628230947,0.0723159249951907,0.068531326650957,0.0327479998484566,0.0157575258991079,0.00586138124804357,0.0852072207926656]]],"label":"% emissions"},{"method":"restyle","args":["y",[[0.00937251468599107,0.0033845175946741,0.0136900299546504,0.0388692351905406,0.0308278572517009,0.0111388075292893,0.0505476746187961,0.015836308002258,0.0822819792716557,0.0102053689482463,0.00199905343005658,0.0339642016824668,0.0236430467068757,0.0128014872140116,0.0443236964022118,0.0315812140544531,0.00873933381128936,0.00622075767807532,0.00185934340235976,0.0333259216217926]]],"label":"% Petrol"},{"method":"restyle","args":["y",[[0.0105255633215476,0.00375905855531358,0.0120525203119651,0.0340744476167814,0.0412112951416701,0.0105836863736849,0.0493990925634334,0.0117490804068591,0.0904436289879061,0.0131840411811793,0.00225339929277358,0.0414004826091975,0.0252607155319614,0.0118875252229988,0.0317221317840907,0.0378177868769919,0.0201103076613026,0.00786652953562576,0.00361863924234991,0.0434253003473255]]],"label":"% Euro 4+"},{"method":"restyle","args":["y",[[0.0105607975464251,0.0050450502537238,0.0157397301867343,0.0369558327489238,0.0296767256033521,0.00771242293399915,0.0415298600758448,0.00846449535532211,0.061375240105044,0.0110720388648453,0.00299703697038268,0.031670641507692,0.0287572426891811,0.0121295640278424,0.0359380850704864,0.0279333024174416,0.0163983878214263,0.00715434961809493,0.00276115169447579,0.0349061900264561]]],"label":"% Disel"},{"method":"restyle","args":["y",[[0.00203187225105233,0.000545287011228887,0.00105788939056657,0.00961047030808227,0.0117806531861698,0.000613263377613757,0.00858281180578105,0.000950902334505104,0.0101565049443222,0.004451455164861,0.000435520323716262,0.00644157543452972,0.00446914895678802,0.000644816987052419,0.00333551940164542,0.00569257019273907,0.00110121330146048,0.00198929596516942,0.000105856033608926,0.00765857476333499]]],"label":"% Eco/Hybrid"}]}],"xaxis":{"domain":[0,1],"automargin":true,"title":"pc_total"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"data":[{"x":[0.022437146734003,0.00914138353835927,0.0312827008064708,0.0880137518527921,0.0739844918418679,0.0199844766209895,0.102388031221357,0.0265154603388861,0.157466735144006,0.0264529090462991,0.00554916037973139,0.0739645168351638,0.0584684548923996,0.0261322354261958,0.0860200084773008,0.067082494419794,0.0267840302466842,0.0158048694120518,0.00484098696546465,0.0776861558001831],"y":[0.0216821689059521,0.00865982737802044,0.0271369654740253,0.0742727974539153,0.0777848294397407,0.0213962024370421,0.0994721512185589,0.0221604085546104,0.174000398894206,0.0257975722259648,0.00508618056999049,0.0803157795356962,0.0558099756546875,0.0260033628230947,0.0723159249951907,0.068531326650957,0.0327479998484566,0.0157575258991079,0.00586138124804357,0.0852072207926656],"text":["ABRUZZO","BASILICATA","CALABRIA","CAMPANIA","EMILIA-ROMAGNA","FRIULI-VENEZIA_GIULIA","LAZIO","LIGURIA","LOMBARDIA","MARCHE","MOLISE","PIEMONTE","PUGLIA","SARDEGNA","SICILIA","TOSCANA","TRENTINO-ALTO-ADIGE","UMBRIA","VALLE-D'AOSTA","VENETO"],"type":"scatter","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="trivia" class="section level2">
+<h2>Trivia</h2>
+<div id="whats-wrong-with-valle-daosta-and-trentino" class="section level3">
+<h3>What’s wrong with Valle d’Aosta and Trentino?</h3>
+<p>Those two outliers deserve a special care in order tho explain their behaviour. Of course here we cannot take everything into account (it would be nother research topic). My intuition behind this strange case was that it could be simply related to the difficulty of moving in a territory made up by <strong>only mountains</strong>.</p>
+<p>A quick surf on <a href="https://it.wikipedia.org/wiki/Zone_altimetriche_d%27Italia#Le_regioni_in_cifre">wikipedia</a> gave me some data about the percentage of mountains by region.</p>
+<pre class="r"><code>df &lt;- dbGetQuery(db, &#39;SELECT count(*) AS n, regione_residenza FROM vehicles GROUP BY regione_residenza&#39;)
+df &lt;- df %&gt;%
+  slice(match( std_name(composition$Regione), std_name(regione_residenza) )) %&gt;%
+  bind_cols(composition[, 2:4])
+
+df = normalize(df, &quot;n&quot;)
+
+fit &lt;- lm(n ~ X..montagna, data = df)
+
+df %&gt;%
+  plot_ly(x = ~X..montagna, text=~paste(regione_residenza)) %&gt;%
+  add_markers(y = ~n, name=&quot;&quot;) %&gt;%
+  add_lines(x = ~X..montagna, y = fitted(fit), name=&quot;regression&quot;) %&gt;%
+  layout(xaxis = list(title=&quot;% of mountains&quot;), yaxis = list(title=&quot;Average car per person&quot;))</code></pre>
+<div id="htmlwidget-0bf075570757f10017bf" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0bf075570757f10017bf">{"x":{"visdat":{"416713c16fd":["function () ","plotlyVisDat"]},"cur_data":"416713c16fd","attrs":{"416713c16fd":{"x":{},"text":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"y":{},"type":"scatter","mode":"markers","name":"","inherit":true},"416713c16fd.1":{"x":{},"text":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"y":[0.954767153764318,1.40841870209226,0.932364608167876,0.841154243953792,1.40841870209226,1.1291869730509,0.948366426451049,0.809150607387447,0.809150607387447,0.842754425782109,0.856355971322806,1.05077806346335,0.817151516529033,1.1291869730509,0.619529060731852,0.885159244232517,0.942765790051938,0.982770335759869,0.803549970988337,0.717140152259205],"type":"scatter","mode":"lines","name":"regression","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"% of mountains"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Average car per person"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"data":[{"x":[43.3,100,40.5,29.1,100,65.1,42.5,25.1,25.1,29.3,31,55.3,26.1,65.1,1.4,34.6,41.8,46.8,24.4,13.6],"text":["PIEMONTE","VALLE-D'AOSTA","LOMBARDIA","VENETO","TRENTINO-ALTO-ADIGE","LIGURIA","FRIULI-VENEZIA_GIULIA","EMILIA-ROMAGNA","TOSCANA","UMBRIA","MARCHE","MOLISE","LAZIO","ABRUZZO","PUGLIA","CAMPANIA","CALABRIA","BASILICATA","SICILIA","SARDEGNA"],"y":[0.881739496076776,2.00100632319615,0.818460625464192,0.826194175497555,1.3086654028294,0.888375644917953,0.857639991509932,0.866772192338504,0.936419846249687,0.931976849339844,0.900876969067467,0.938345440577258,0.905777356901572,0.889934275955827,0.75341790337633,0.787946509784,0.833995421853368,0.840851463011225,0.892631752327288,0.827091888244945],"type":"scatter","mode":"markers","name":"","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1.4,13.6,24.4,25.1,25.1,26.1,29.1,29.3,31,34.6,40.5,41.8,42.5,43.3,46.8,55.3,65.1,65.1,100,100],"text":["PUGLIA","SARDEGNA","SICILIA","EMILIA-ROMAGNA","TOSCANA","LAZIO","VENETO","UMBRIA","MARCHE","CAMPANIA","LOMBARDIA","CALABRIA","FRIULI-VENEZIA_GIULIA","PIEMONTE","BASILICATA","MOLISE","LIGURIA","ABRUZZO","VALLE-D'AOSTA","TRENTINO-ALTO-ADIGE"],"y":[0.619529060731852,0.717140152259205,0.803549970988337,0.809150607387447,0.809150607387447,0.817151516529033,0.841154243953792,0.842754425782109,0.856355971322806,0.885159244232517,0.932364608167876,0.942765790051938,0.948366426451049,0.954767153764318,0.982770335759869,1.05077806346335,1.1291869730509,1.1291869730509,1.40841870209226,1.40841870209226],"type":"scatter","mode":"lines","name":"regression","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
+<p>Actually the result is not very satisfying but, as initial guess, could hold.</p>
+</div>
+<div id="the-oldest-vehicle" class="section level3">
+<h3>The oldest vehicle</h3>
+<p>By this simple query we extracted the record of the oldest registered vehicle.</p>
+<pre class="sql"><code>SELECT * FROM vehicles WHERE data_immatricolazione != &quot;&quot; ORDER BY data_immatricolazione ASC LIMIT 1;</code></pre>
+<p>It is a motorbike owned by an old man of 75 years that has been <strong>registered in 1854</strong>. It’s in the region considered the capital of the two wheels: Emilia-Romagna, in the province of Parma. I like to imagine this happy old man with his motorbike that for sure has a lot of nice and old memories to tell.</p>
+</div>
+</div>
+<div id="the-challenge-of-managing-52m-rows" class="section level2">
+<h2>The challenge of managing 52M rows</h2>
+<p>Speaking of about 52M rows equals speaking about enough data to define them “big”. To manage big dataset there are many techniques that requires splitting the computing load on different processes or even different machines.</p>
+<p>Our aim is simply to use the resources available on a normal average notebook but, unfortunately, to run even a simple counting query it takes several minutes. This is due to the amount of the rows but also the the standard behaviour of SQLite when importing data from a <em>.csv</em> file: all the columns are treated as text so it cannot create proper and efficient indexes to manage the informations in a optimized way.</p>
+<p>Of course it’s nearly impossible to work and analyse data in real-time with these constraints so we need a solution that can allow us to have a proper exploratory analysis without waiting too much for getting any query executed.</p>
+<p>Operating some simple tricks it’s possible to solve the situation: in first place it’s possible to subsample randomly the data in such a way that the sample keeps intact the proportional quantities present in the original dataset and secondly it’s possible to transform some columns into integers and to create on them some indexes. These solutions have provided an incredible speedup (queries now executes in a matter of seconds).</p>
+<pre class="sql"><code>-- Query used for subsampling the dataset
+INSERT INTO vehicles_sub SELECT * FROM vehicles WHERE id IN (SELECT id FROM vehicles ORDER BY RANDOM() LIMIT 1000000);</code></pre>
+<p><em>The subsampled dataset is used only in the development phase simply to drive decisions and give a preliminary idea of the results. The final render of the document is done using the whole dataset.</em></p>
+</div>
+<div id="conclusions" class="section level2">
+<h2>Conclusions</h2>
+<p>This analysis gave me a lot of insight in many fields that I didn’t know. Moreover it changed and twisted my opinions under many points of view.</p>
+<p>Speaking about the problem of pollution, it seems we’re not making enough efforts to a more eco-friendly world: the electric shift is still far from affordable and the numbers of registered cars over the year seems to confirm it. Since the current amount of emissions is so linked to the number of vehicles (cars, actually) we own, the fastest way for having an healthier environment would be simply to cut the usage of cars.</p>
+<p>Of course many of the conclusions and the judgments done are subject to big possible mistakes: from a registry of vehicles and without taking into account the dynamics, it’s very hard to be completely right.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
